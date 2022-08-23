@@ -1,0 +1,12 @@
+.pfs__header {
+    text-align: center;
+}
+
+.pfs__label {
+    width: 100%;
+    display: block;
+}
+
+.pfs__input {
+    width: 100%;
+}
