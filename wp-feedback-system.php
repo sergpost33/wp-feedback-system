@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
 /**
  * Plugin Name: WP Feedback System
  * Description: Feedback system for your blog
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: sergpost33
  * Text Domain: pfs
  * Domain Path: /languages
  * License: GPLv2 or later
  */
 
-define('PFS_VERSION', '1.1.1');
+define('PFS_VERSION', '1.1.2');
 define('PFS__PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PFS__PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -37,3 +37,5 @@ add_action('wp_ajax_pfs_add_feedback', ['PFS', 'add_feedback']);
 add_action('wp_ajax_nopriv_pfs_add_feedback', ['PFS', 'add_feedback']);
 
 add_action('admin_menu', ['PFS', 'add_admin_page']);
+
+add_filter('plugin_action_links_wp-feedback-system/wp-feedback-system.php', ['PFS', 'add_feedback_list_link']);
