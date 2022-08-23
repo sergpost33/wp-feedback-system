@@ -5,8 +5,9 @@ if (!defined('ABSPATH'))
 
 class PFS
 {
-    public static function init() {
-        load_plugin_textdomain( 'pfs', false, 'wp-feedback-system/languages/' );
+    public static function init()
+    {
+        load_plugin_textdomain('pfs', false, 'wp-feedback-system/languages/');
     }
 
     // Try to create table for feedbacks, if it not exists
@@ -122,11 +123,24 @@ class PFS
         );
     }
 
-    public function handler_admin_page()
+    public static function handler_admin_page()
     {
         $feedbackListTable = new Feedback_List_Table();
         $feedbackListTable->prepare_items();
         include(PFS__PLUGIN_DIR . '/views/admin/feedbacks_list.php');
+    }
+
+    public static function add_feedback_list_link($links)
+    {
+        $url = esc_url(add_query_arg(
+            'page',
+            'feedbacks',
+            get_admin_url() . 'admin.php'
+        ));
+
+        $links[] = "<a href='$url'>" . __("Feedbacks", "pfs") . '</a>';
+
+        return $links;
     }
 
     private static function get_view($file, $data)
