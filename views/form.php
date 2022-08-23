@@ -29,7 +29,7 @@ if (!defined('ABSPATH'))
 
         <label class="pfs__label">
             Your phone
-            <input type="text" class="pfs__input" name="pfs_phone" maxlength="25" placeholder="Phone *" />
+            <input type="tel" class="pfs__input" name="pfs_phone" maxlength="25" placeholder="Phone *" />
             <span class="pfs__error" data-field="pfs_phone"></span>
         </label>
 

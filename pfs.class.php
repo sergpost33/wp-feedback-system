@@ -36,6 +36,7 @@ class PFS
     public static function enqueue_scripts()
     {
         wp_enqueue_style('pfs', plugins_url('/assets/css/pfs.css', __FILE__));
+        wp_enqueue_script( 'inputmask', '//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8-beta.17/jquery.inputmask.min.js', [ 'jquery' ] );
         wp_enqueue_script('pfs', plugins_url('/assets/js/pfs.js', __FILE__), ['jquery']);
         wp_localize_script('pfs', 'PFS', ['ajax_url' => admin_url('admin-ajax.php')]);
     }

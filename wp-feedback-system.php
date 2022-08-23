@@ -1,6 +1,5 @@
 <?php
 
-// ToDo add phone verification on frontend using library inputmask
 // ToDo add validation on frontend
 // ToDo add localization
 
@@ -10,14 +9,14 @@ if (!defined('ABSPATH'))
 /**
  * Plugin Name: WP Feedback System
  * Description: Feedback system for your blog
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: sergpost33
  * Text Domain: pfs
  * Domain Path: /languages
  * License: GPLv2 or later
  */
 
-define('PFS_VERSION', '1.0.2');
+define('PFS_VERSION', '1.0.3');
 define('PFS__PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PFS__PLUGIN_URL', plugin_dir_url(__FILE__));
 

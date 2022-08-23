@@ -29,6 +29,10 @@ jQuery(document).ready(function ($) {
             }
         );
     });
+
+    $("input[type=tel]").inputmask({
+        mask: "+9 (999) 999-9999"
+    });
 });
 
 function hide_summary(form) {
