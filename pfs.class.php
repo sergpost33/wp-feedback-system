@@ -27,6 +27,12 @@ class PFS
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
     }
 
+    public static function get_table_name()
+    {
+        global $wpdb;
+        return $wpdb->prefix . "pfs_feedbacks";
+    }
+
     public static function enqueue_scripts()
     {
         wp_enqueue_style('pfs', plugins_url('/assets/css/pfs.css', __FILE__));
@@ -97,6 +103,26 @@ class PFS
         return self::get_view('form.php', $form_data);
     }
 
+    public static function add_admin_page()
+    {
+        add_menu_page(
+            'Feedbacks',
+            'Feedbacks',
+            'edit_plugins',
+            'feedbacks',
+            [__CLASS__, 'handler_admin_page'],
+            'dashicons-admin-comments',
+            68
+        );
+    }
+
+    public function handler_admin_page()
+    {
+        $feedbackListTable = new Feedback_List_Table();
+        $feedbackListTable->prepare_items();
+        include(PFS__PLUGIN_DIR . '/views/admin/feedbacks_list.php');
+    }
+
     private static function get_view($file, $data)
     {
         extract($data);
@@ -104,11 +130,5 @@ class PFS
         ob_start();
         include(PFS__PLUGIN_DIR . '/views/' . $file);
         return ob_get_clean();
-    }
-
-    private static function get_table_name()
-    {
-        global $wpdb;
-        return $wpdb->prefix . "pfs_feedbacks";
     }
 }
