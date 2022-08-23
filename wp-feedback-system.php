@@ -6,14 +6,14 @@ if (!defined('ABSPATH'))
 /**
  * Plugin Name: WP Feedback System
  * Description: Feedback system for your blog
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: sergpost33
  * Text Domain: pfs
  * Domain Path: /languages
  * License: GPLv2 or later
  */
 
-define('PFS_VERSION', '1.1.0');
+define('PFS_VERSION', '1.1.1');
 define('PFS__PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('PFS__PLUGIN_URL', plugin_dir_url(__FILE__));
 

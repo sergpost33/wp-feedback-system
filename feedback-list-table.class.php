@@ -66,7 +66,7 @@ class Feedback_List_Table extends WP_List_Table
                 return date('d.m.Y H:i', $item[$column_name]);
 
             default:
-                return $item[$column_name];
+                return htmlspecialchars($item[$column_name]);
         }
     }
 }
