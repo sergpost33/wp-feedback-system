@@ -5,6 +5,10 @@ if (!defined('ABSPATH'))
 
 class PFS
 {
+    public static function init() {
+        load_plugin_textdomain( 'pfs', false, 'wp-feedback-system/languages/' );
+    }
+
     // Try to create table for feedbacks, if it not exists
     public static function plugin_activation()
     {
@@ -36,7 +40,7 @@ class PFS
     public static function enqueue_scripts()
     {
         wp_enqueue_style('pfs', plugins_url('/assets/css/pfs.css', __FILE__));
-        wp_enqueue_script( 'inputmask', '//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8-beta.17/jquery.inputmask.min.js', [ 'jquery' ] );
+        wp_enqueue_script('inputmask', '//cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8-beta.17/jquery.inputmask.min.js', ['jquery']);
         wp_enqueue_script('pfs', plugins_url('/assets/js/pfs.js', __FILE__), ['jquery']);
         wp_localize_script('pfs', 'PFS', ['ajax_url' => admin_url('admin-ajax.php')]);
     }
@@ -48,42 +52,42 @@ class PFS
         parse_str($_POST['data'], $data);
 
         if (!wp_verify_nonce($data['_pfsnonce'], '_new_feedback')) {
-            wp_send_json_error('Security Alert!');
+            wp_send_json_error(__("Security Alert!", "pfs"));
         }
 
         // Server-side validation
         $errors = [];
 
         if (empty($data['pfs_name'])) {
-            $errors['pfs_name'] = 'Name is empty';
+            $errors['pfs_name'] = __("Name is empty", "pfs");
         }
 
         if (empty($errors['pfs_name']) && strlen($data['pfs_name']) > 50) {
-            $errors['pfs_name'] = 'Name is too large';
+            $errors['pfs_name'] = __("Name is too large", "pfs");
         }
 
         if (empty($data['pfs_email'])) {
-            $errors['pfs_email'] = 'Email is empty';
+            $errors['pfs_email'] = __("Email is empty", "pfs");
         }
 
         if (empty($errors['pfs_email']) && !is_email($data['pfs_email'])) {
-            $errors['pfs_email'] = 'Email is incorrect';
+            $errors['pfs_email'] = __("Email is incorrect", "pfs");
         }
 
         if (empty($errors['pfs_email']) && strlen($data['pfs_email']) > 50) {
-            $errors['pfs_email'] = 'Email is too large';
+            $errors['pfs_email'] = __("Email is too large", "pfs");
         }
 
         if (empty($data['pfs_phone'])) {
-            $errors['pfs_phone'] = 'Phone is empty';
+            $errors['pfs_phone'] = __("Phone is empty", "pfs");
         }
 
         if (empty($errors['pfs_phone']) && strlen($data['pfs_phone']) > 25) {
-            $errors['pfs_phone'] = 'Phone is too large';
+            $errors['pfs_phone'] = __("Phone is too large", "pfs");
         }
 
         if (!empty($errors)) {
-            wp_send_json_error(['errors' => $errors, 'message' => 'One or more fields have errors']);
+            wp_send_json_error(['errors' => $errors, 'message' => __("One or more fields have errors", "pfs")]);
         } else {
             $wpdb->insert(self::get_table_name(), [
                 "name" => $data['pfs_name'],
@@ -92,23 +96,24 @@ class PFS
                 "time" => time()
             ]);
 
-            wp_send_json_success(['message' => 'Feedback sent!']);
+            wp_send_json_success(['message' => __("Feedback sent!", "pfs")]);
         }
     }
 
     public static function shortcode_form($attributes)
     {
-        $form_data['header'] = !empty($attributes['header']) ? $attributes['header'] : 'Feedback System';
-        $form_data['submit_text'] = !empty($attributes['submit_text']) ? $attributes['submit_text'] : 'Submit';
+        $form_data['header'] = !empty($attributes['header']) ? $attributes['header'] : __("Feedback System", "pfs");
+        $form_data['submit_text'] = !empty($attributes['submit_text']) ? $attributes['submit_text'] : __("Submit", "pfs");
 
         return self::get_view('form.php', $form_data);
     }
 
     public static function add_admin_page()
     {
+
         add_menu_page(
-            'Feedbacks',
-            'Feedbacks',
+            __("Feedbacks", "pfs"),
+            __("Feedbacks", "pfs"),
             'edit_plugins',
             'feedbacks',
             [__CLASS__, 'handler_admin_page'],

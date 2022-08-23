@@ -31,10 +31,10 @@ class Feedback_List_Table extends WP_List_Table
     public function get_columns()
     {
         $columns = array(
-            'name' => 'Name',
-            'email' => 'Email',
-            'phone' => 'Phone',
-            'time' => 'Date'
+            'name' => __("Name", "pfs"),
+            'email' => __("Email", "pfs"),
+            'phone' => __("Phone", "pfs"),
+            'time' => __("Date", "pfs")
         );
 
         return $columns;
