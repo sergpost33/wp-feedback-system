@@ -28,3 +28,6 @@ register_activation_hook(__FILE__, ['PFS', 'plugin_activation']);
 add_shortcode('feedback_system', ['PFS', 'shortcode_form']);
 
 add_action('wp_enqueue_scripts', ['PFS', 'enqueue_scripts']);
+
+add_action('wp_ajax_pfs_add_feedback', ['PFS', 'add_feedback']);
+add_action('wp_ajax_nopriv_pfs_add_feedback', ['PFS', 'add_feedback']);

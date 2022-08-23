@@ -7,6 +7,32 @@
     display: block;
 }
 
+.pfs__error {
+    display: block;
+    font-size: .6em;
+    color: red;
+}
+
+.pfs__error:empty {
+    display: none;
+}
+
 .pfs__input {
     width: 100%;
+    box-sizing: border-box;
+}
+
+.pfs__summary {
+    display: none;
+    padding: 10px;
+    margin: 16px 0;
+    box-sizing: border-box;
+}
+
+.pfs__summary.error {
+    border: 1px solid red;
+}
+
+.pfs__summary.success {
+    border: 1px solid green;
 }
